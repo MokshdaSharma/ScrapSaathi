@@ -1,0 +1,61 @@
+{
+  "description": "Test fixtures for the ScrapSaathi route optimizer. Used by both the frontend and the AWS Lambda to verify identical route output.",
+  "fixture1": {
+    "description": "Three pins in a straight line, no clustering needed",
+    "input": {
+      "currentLat": 28.610,
+      "currentLng": 77.200,
+      "pins": [
+        { "pinId": "pin_A", "lat": 28.615, "lng": 77.205 },
+        { "pinId": "pin_B", "lat": 28.620, "lng": 77.210 },
+        { "pinId": "pin_C", "lat": 28.625, "lng": 77.215 }
+      ]
+    },
+    "expected": {
+      "orderedPinIds": ["pin_A", "pin_B", "pin_C"],
+      "estimatedDistanceKm": 2.12
+    }
+  },
+  "fixture2": {
+    "description": "Two pins within 150m cluster together, one distant pin visited last",
+    "input": {
+      "currentLat": 28.600,
+      "currentLng": 77.200,
+      "pins": [
+        { "pinId": "pin_X", "lat": 28.650, "lng": 77.250 },
+        { "pinId": "pin_Y", "lat": 28.6505, "lng": 77.2505 },
+        { "pinId": "pin_Z", "lat": 28.605, "lng": 77.203 }
+      ]
+    },
+    "expected": {
+      "orderedPinIds": ["pin_Z", "pin_X", "pin_Y"],
+      "estimatedDistanceKm": 7.37
+    }
+  },
+  "fixture3": {
+    "description": "Single pin — trivial case",
+    "input": {
+      "currentLat": 28.610,
+      "currentLng": 77.200,
+      "pins": [
+        { "pinId": "pin_1", "lat": 28.620, "lng": 77.210 }
+      ]
+    },
+    "expected": {
+      "orderedPinIds": ["pin_1"],
+      "estimatedDistanceKm": 1.44
+    }
+  },
+  "fixture4": {
+    "description": "Empty pin list — returns zero distance",
+    "input": {
+      "currentLat": 28.610,
+      "currentLng": 77.200,
+      "pins": []
+    },
+    "expected": {
+      "orderedPinIds": [],
+      "estimatedDistanceKm": 0
+    }
+  }
+}

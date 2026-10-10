@@ -1,0 +1,39 @@
+{
+  "name": "scrapsaathi",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "frontend/apps/household",
+    "frontend/apps/picker",
+    "frontend/apps/aggregator",
+    "frontend/shared/api-client",
+    "frontend/shared/route-optimizer",
+    "frontend/shared/ui-components",
+    "frontend/mock-api",
+    "aws"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:portal\"",
+    "dev:portal": "npm run dev --workspace=frontend/apps/household",
+    "dev:backend": "npm run dev --workspace=frontend/mock-api",
+    "dev:household": "npm run dev --workspace=frontend/apps/household",
+    "dev:picker": "npm run dev --workspace=frontend/apps/picker",
+    "dev:aggregator": "npm run dev --workspace=frontend/apps/aggregator",
+    "dev:mock-api": "npm run dev --workspace=frontend/mock-api",
+    "dev:all": "concurrently \"npm run dev:mock-api\" \"npm run dev:portal\"",
+    "test": "npm run test --workspaces --if-present",
+    "test:contract": "node frontend/mock-api/scripts/contract-test.js",
+    "build": "npm run build --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "concurrently": "^8.2.2",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "jsonwebtoken": "^9.0.3"
+  }
+}

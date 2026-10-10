@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html,
+  body {
+    @apply bg-slate-900 text-slate-100 font-sans;
+    min-height: 100dvh;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Focus ring */
+  :focus-visible {
+    @apply outline-none ring-2 ring-green-500 ring-offset-2 ring-offset-slate-900;
+  }
+
+  /* Reduce motion */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Card style */
+  .card {
+    @apply bg-slate-800 border border-slate-700 rounded-2xl p-4;
+  }
+
+  /* Section heading */
+  .section-heading {
+    @apply text-sm font-semibold text-slate-400 uppercase tracking-wide;
+  }
+
+  /* Bottom sheet container */
+  .bottom-sheet {
+    @apply fixed inset-x-0 bottom-0 z-40 bg-slate-800 border-t border-slate-700
+      rounded-t-3xl p-6 shadow-2xl;
+    animation: slideUp 0.25s ease;
+  }
+
+  /* Gradient background for hero sections */
+  .hero-gradient {
+    @apply bg-gradient-to-br from-slate-900 via-green-950 to-slate-900;
+  }
+}
+
+/* Animations */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.7;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.25s ease;
+}
